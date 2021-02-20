@@ -16,6 +16,7 @@
   },
   "license": "0BSD",
   "dependencies": {
+    "faunadb": "^4.1.0",
     "gatsby": "^2.32.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

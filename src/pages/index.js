@@ -1,13 +1,30 @@
-import React from "react";
-import Home from "../index";
+import React, { useState, useEffect } from "react";
 
-function index() {
+export default function Home() {
+  const [mydata, setData] = useState("Default Hello");
+
+  useEffect(() => {
+    console.log("useEffect Called");
+    fetch(`/.netlify/functions/hello`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        console.log("Data: " + data);
+      });
+  }, []);
+
   return (
     <div>
+      <h1>Static Data</h1>
       <h1>Serverless CRUD App</h1>
-      <Home />
+      <div>Hello world with Gatsby from Netlify!</div>
+      <h1>Data Coming From FaunaDB</h1>
+      <h2>
+        <span>Name:</span> {mydata.name}
+      </h2>
+      <h2>
+        <span>Age:</span> {mydata.age}
+      </h2>
     </div>
   );
 }
-
-export default index;
