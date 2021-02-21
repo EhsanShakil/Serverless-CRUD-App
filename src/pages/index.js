@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FormikForm from "./index";
 
 export default function Home() {
   const [mydata, setData] = useState("Default Hello");
@@ -25,6 +26,7 @@ export default function Home() {
       <h2>
         <span>Age:</span> {mydata.age}
       </h2>
+      <FormikForm />
     </div>
   );
 }
