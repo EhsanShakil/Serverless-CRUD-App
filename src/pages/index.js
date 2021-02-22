@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FormikForm from "./index";
+import { Link, navigate } from "gatsby";
 
 export default function Home() {
   const [mydata, setData] = useState("Default Hello");
@@ -26,7 +27,7 @@ export default function Home() {
       <h2>
         <span>Age:</span> {mydata.age}
       </h2>
-      <FormikForm />
+      <Link to="/form">Form Page</Link>
     </div>
   );
 }

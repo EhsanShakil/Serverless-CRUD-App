@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import TextField from "@material-ui/core/TextField";
+import "./form.css";
 
 export default function FormikForm() {
   const [mydata, setData] = useState("");
 
   return (
-    <div>
-      <div>Directory Addition Form</div>
+    <div className="container">
+      <h2>Submit Your Details</h2>
       <Formik
         initialValues={{
           name: "",
-          age: 0,
+          age: null,
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -27,15 +28,16 @@ export default function FormikForm() {
         }}
       >
         {(formik) => (
-          <Form onSubmit={formik.handleSubmit}>
+          <Form onSubmit={formik.handleSubmit} className="form">
             <div>
               <Field
                 type="text"
                 as={TextField}
                 variant="outlined"
-                label="Name::"
+                label="Name"
                 name="name"
                 id="name"
+                required
               />
               <ErrorMessage
                 name="name"
@@ -46,21 +48,25 @@ export default function FormikForm() {
               <Field
                 type="number"
                 as={TextField}
-                label="Age:: "
+                label="Age"
                 variant="filled"
                 name="age"
                 id="age"
+                required
               />
               <ErrorMessage name="age" />
             </div>
             <div>
-              <button type="submit">Add</button>
+              <button className="button" type="submit">
+                Add
+              </button>
             </div>
           </Form>
         )}
       </Formik>
-
-      <div>{mydata.id}</div>
+      <h3>{mydata.id}</h3>
+      <h3>{mydata.name}</h3>
+      <h3>{mydata.age}</h3>
     </div>
   );
 }
