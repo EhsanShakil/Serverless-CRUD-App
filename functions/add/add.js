@@ -26,7 +26,11 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ id: `${result.ref.id}` }),
+      body: JSON.stringify({
+        id: `${result.ref.id}`,
+        name: `${result.data.name}`,
+        age: `${result.data.age}`,
+      }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,
