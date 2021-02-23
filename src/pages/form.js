@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import TextField from "@material-ui/core/TextField";
 import "./form.css";
 
 export default function FormikForm() {
-  const [mydata, setData] = useState("");
+  const [mydata, setData] = useState();
   const [details, setDetails] = useState([]);
-  console.log(details);
+  console.log("mydata", mydata);
+  console.log("details", details);
+
   return (
     <div className="container">
       <h2>Submit Your Details</h2>
@@ -16,16 +18,15 @@ export default function FormikForm() {
           age: null,
         }}
         onSubmit={(values) => {
-          console.log(values);
+          // console.log(values);
           fetch(`/.netlify/functions/add`, {
             method: "post",
             body: JSON.stringify(values),
           })
             .then((response) => response.json())
             .then((data) => {
-              setData(data);
-              console.log("Data: " + JSON.stringify(data));
               details.push(data);
+              setData(data);
             });
         }}
       >
