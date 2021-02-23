@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FormikForm from "./index";
-import { Link, navigate } from "gatsby";
+import { Link } from "gatsby";
 
 export default function Home() {
   const [mydata, setData] = useState("Default Hello");

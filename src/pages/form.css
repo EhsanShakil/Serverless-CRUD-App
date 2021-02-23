@@ -28,3 +28,10 @@
 .button:active {
   transform: translateY(4px);
 }
+.data {
+  display: flex;
+  flex-direction: row;
+}
+.data > h3 {
+  margin: 20px;
+}

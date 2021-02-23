@@ -5,7 +5,8 @@ import "./form.css";
 
 export default function FormikForm() {
   const [mydata, setData] = useState("");
-
+  const [details, setDetails] = useState([]);
+  console.log(details);
   return (
     <div className="container">
       <h2>Submit Your Details</h2>
@@ -24,6 +25,7 @@ export default function FormikForm() {
             .then((data) => {
               setData(data);
               console.log("Data: " + JSON.stringify(data));
+              details.push(data);
             });
         }}
       >
@@ -64,9 +66,14 @@ export default function FormikForm() {
           </Form>
         )}
       </Formik>
-      <h3>{mydata.id}</h3>
-      <h3>{mydata.name}</h3>
-      <h3>{mydata.age}</h3>
+      {details.map((data, index) => {
+        return (
+          <div key={index} className="data">
+            <h3>{data.name}</h3>
+            <h3>{data.age}</h3>
+          </div>
+        );
+      })}
     </div>
   );
 }
