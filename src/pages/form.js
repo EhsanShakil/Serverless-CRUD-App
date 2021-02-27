@@ -6,8 +6,8 @@ import "./form.css";
 export default function FormikForm() {
   const [mydata, setData] = useState();
   const [details, setDetails] = useState([]);
-  console.log("mydata", mydata);
-  console.log("details", details);
+  // console.log("mydata", mydata);
+  // console.log("details", details);
 
   return (
     <div className="container">
