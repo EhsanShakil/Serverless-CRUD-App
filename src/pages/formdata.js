@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "gatsby";
 
 export default function FormData() {
   const [mydata, setData] = useState("Default Hello");
 
   useEffect(() => {
-    fetch(`/.netlify/functions/form`)
+    fetch(`/.netlify/functions/formdetails`)
       .then((response) => response.json())
       .then((data) => {
         setData(data);
