@@ -8,17 +8,21 @@ exports.handler = async (event, context) => {
     var client = new faunadb.Client({
       secret: "fnAECCbbi6ACDcQkeuKs-Kfj2IAFAmZ3vPukaud5",
     });
-    var result = await client.query(
-      q.Get(q.Ref(q.Collection("post"), "290614922582163981"))
-    );
-    console.log("Document retrived from Container in Database: " + result.data);
 
+    var result = await client
+      .query(
+        q.Map(
+          q.Paginate(q.Documents(q.Collection("post"))),
+          q.Lambda("X", q.Get(q.Var("X")))
+        )
+      )
+      .then((ret) => ret)
+      .catch((err) => console.error("Error: %s", err));
+
+    console.log("DATA", result.data);
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        name: `${result.data.name}`,
-        age: `${result.data.age}`,
-      }),
+      body: JSON.stringify(result.data),
 
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
