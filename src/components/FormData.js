@@ -9,13 +9,15 @@ export default function FormData() {
       .then((data) => {
         setData(data);
       });
-  }, []);
-  if (!data) {
-    return <h1>Loading...</h1>;
-  }
+  }, [data]);
   return (
-    <div>
-      <h1>Form Data</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <h2>Your Details</h2>
       <table
         style={{
           width: "20%",
@@ -36,14 +38,6 @@ export default function FormData() {
           </tr>
         ))}
       </table>
-      {/* <div key={index}> */}
-      {/* <h2> */}
-      {/* <span>Name:</span> {details.data.name} */}
-      {/* </h2> */}
-      {/* <h2> */}
-      {/* <span>Age:</span> {details.data.age} */}
-      {/* </h2> */}
-      {/* </div> */}
     </div>
   );
 }
