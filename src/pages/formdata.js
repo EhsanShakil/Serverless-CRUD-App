@@ -16,20 +16,21 @@ export default function FormData() {
   return (
     <div>
       <h1>Form Data</h1>
-      <table>
+      <table
+        style={{
+          width: "20%",
+        }}
+      >
         <tr
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            textAlign: "center",
           }}
         >
           <th>Name</th>
           <th>Age</th>
         </tr>
-
         {data.map((details, index) => (
-          <tr key={index}>
+          <tr key={index} style={{ textAlign: "center" }}>
             <td>{details.data.name}</td>
             <td>{details.data.age}</td>
           </tr>
