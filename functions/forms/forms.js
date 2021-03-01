@@ -19,7 +19,6 @@ exports.handler = async (event, context) => {
       .then((ret) => ret)
       .catch((err) => console.error("Error: %s", err));
 
-    console.log("DATA", result.data);
     return {
       statusCode: 200,
       body: JSON.stringify(result.data),

@@ -6,7 +6,6 @@ import FormData from "../components/FormData";
 
 export default function FormikForm() {
   const [mydata, setData] = useState();
-  const [details, setDetails] = useState([]);
   return (
     <>
       <div className="container">
@@ -17,14 +16,12 @@ export default function FormikForm() {
             age: null,
           }}
           onSubmit={(values) => {
-            // console.log(values);
             fetch(`/.netlify/functions/add`, {
               method: "post",
               body: JSON.stringify(values),
             })
               .then((response) => response.json())
               .then((data) => {
-                details.push(data);
                 setData(data);
               });
           }}

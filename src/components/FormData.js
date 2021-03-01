@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 export default function FormData() {
   const [data, setData] = useState([]);
-  console.log(data);
   useEffect(() => {
     fetch(`/.netlify/functions/forms`)
       .then((response) => response.json())
