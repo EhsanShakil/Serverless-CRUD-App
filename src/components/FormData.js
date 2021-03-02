@@ -10,18 +10,9 @@ export default function FormData() {
       });
   }, [data]);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div>
       <h2>Your Details</h2>
-      <table
-        style={{
-          width: "20%",
-        }}
-      >
+      <table className="table">
         <tr
           style={{
             textAlign: "center",

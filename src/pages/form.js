@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import TextField from "@material-ui/core/TextField";
-import "./form.css";
 import FormData from "../components/FormData";
 
 export default function FormikForm() {
