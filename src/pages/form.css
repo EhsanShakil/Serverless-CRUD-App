@@ -28,6 +28,9 @@
 .button:active {
   transform: translateY(4px);
 }
+.button:hover {
+  cursor: pointer;
+}
 .data {
   display: flex;
   flex-direction: row;
