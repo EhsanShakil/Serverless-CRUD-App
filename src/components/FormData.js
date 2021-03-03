@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function FormData() {
   const [data, setData] = useState([]);
-  const [id, setId] = useState();
+  // const [id, setId] = useState();
 
   useEffect(() => {
     fetch(`/.netlify/functions/forms`)
@@ -11,8 +11,8 @@ export default function FormData() {
         setData(data);
       });
   }, []);
-  const delelte = () => {
-    return data.filter((x) => x.ts != x.ts);
+  const delelte = (id) => {
+    return data.filter((x) => x.ts != id);
   };
   return (
     <div>
@@ -31,7 +31,8 @@ export default function FormData() {
           <tr key={index} style={{ textAlign: "center" }}>
             <td>{details.data.name}</td>
             <td>{details.data.age}</td>
-            <button onClick={() => delelte}>Delete</button>
+            {/* {setId(details.ts)} */}
+            <button onClick={() => delelte(details.ts)}>Delete</button>
             {console.log(details.ts)}
           </tr>
         ))}
