@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 export default function FormData() {
   const [data, setData] = useState([]);
+  const [startUseffect, setUseEffect] = useState();
+
   // const [id, setId] = useState();
 
   useEffect(() => {
@@ -10,13 +12,20 @@ export default function FormData() {
       .then((data) => {
         setData(data);
       });
-  }, []);
-  const delelte = (id) => {
-    console.log("ID", id);
-    fetch(`/.netlify/functions/delete`, {
-      method: "delete",
+  }, [startUseffect]);
+  const deleteTask = async (id) => {
+    console.log(id);
+    await fetch(`/.netlify/functions/delete`, {
+      method: "DELETE",
       body: JSON.stringify(id),
-    }).then((response) => response.json());
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => `error here : ${error}`);
   };
 
   return (
@@ -38,7 +47,14 @@ export default function FormData() {
             <td>{details.data.name}</td>
             <td>{details.data.age}</td>
             {/* {setId(details.ts)} */}
-            <button onClick={() => delelte(details.ts)}>Delete</button>
+            <button
+              onClick={async () => {
+                deleteTask(details.ref["@ref"].id);
+                setUseEffect(true);
+              }}
+            >
+              Delete
+            </button>
             {/* {console.log(details.ts)} */}
           </tr>
         ))}

@@ -23,14 +23,14 @@ exports.handler = async (event, context) => {
       q.Delete(q.Ref(q.Collection("post"), reqObj))
     );
     // console.log("RESULT", result);
-    return result;
-    // return {
-    // statusCode: 200,
-    // body: JSON.stringify(result),
-    // // more keys you can return:
-    // headers: { "headerName": "headerValue", ... },
-    // isBase64Encoded: true,
-    // };
+    // return result;
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: `${result}` }),
+      // // more keys you can return:
+      // headers: { "headerName": "headerValue", ... },
+      // isBase64Encoded: true,
+    };
   } catch (err) {
     return { statusCode: 500, body: err.toString() };
   }
