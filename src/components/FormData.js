@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 
 export default function FormData() {
   const [data, setData] = useState([]);
-  const [startUseffect, setUseEffect] = useState();
-
-  // const [id, setId] = useState();
-
   useEffect(() => {
     fetch(`/.netlify/functions/forms`)
       .then((response) => response.json())
       .then((data) => {
         setData(data);
       });
-  }, [startUseffect]);
+  }, [data]);
   const deleteTask = async (id) => {
     console.log(id);
     await fetch(`/.netlify/functions/delete`, {
@@ -39,7 +35,7 @@ export default function FormData() {
         >
           <th>Name</th>
           <th>Age</th>
-          <th>Delete</th>
+          <th>Remove</th>
         </tr>
         {data.map((details, index) => (
           <tr key={index} style={{ textAlign: "center" }}>
@@ -48,9 +44,9 @@ export default function FormData() {
             <td>{details.data.age}</td>
             {/* {setId(details.ts)} */}
             <button
+              className="deleteButton"
               onClick={async () => {
                 deleteTask(details.ref["@ref"].id);
-                setUseEffect(true);
               }}
             >
               Delete
