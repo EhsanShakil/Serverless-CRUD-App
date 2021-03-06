@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function FormData() {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     fetch(`/.netlify/functions/forms`)
       .then((response) => response.json())
@@ -23,7 +24,17 @@ export default function FormData() {
       })
       .catch((error) => `error here : ${error}`);
   };
-
+  const updateTask = async (id, name, age) => {
+    console.log(id, name, age);
+    await fetch(`/.netlify/functions/update`, {
+      method: "PUT",
+      body: JSON.stringify({ id, name, age }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
+  };
   return (
     <div>
       <h2>Your Details</h2>
@@ -42,7 +53,6 @@ export default function FormData() {
             {console.log(details)}
             <td>{details.data.name}</td>
             <td>{details.data.age}</td>
-            {/* {setId(details.ts)} */}
             <button
               className="deleteButton"
               onClick={async () => {
@@ -51,7 +61,6 @@ export default function FormData() {
             >
               Delete
             </button>
-            {/* {console.log(details.ts)} */}
           </tr>
         ))}
       </table>
