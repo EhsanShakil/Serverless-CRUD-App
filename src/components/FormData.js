@@ -24,17 +24,7 @@ export default function FormData() {
       })
       .catch((error) => `error here : ${error}`);
   };
-  const updateTask = async (id, name, age) => {
-    console.log(id, name, age);
-    await fetch(`/.netlify/functions/update`, {
-      method: "PUT",
-      body: JSON.stringify({ id, name, age }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      });
-  };
+
   return (
     <div>
       <h2>Your Details</h2>
