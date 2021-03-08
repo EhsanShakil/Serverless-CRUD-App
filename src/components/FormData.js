@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Formik, Form, ErrorMessage, Field } from "formik";
+import TextField from "@material-ui/core/TextField";
+import Modal from "react-modal";
 
 export default function FormData() {
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetch(`/.netlify/functions/forms`)
@@ -23,6 +27,49 @@ export default function FormData() {
         return data;
       })
       .catch((error) => `error here : ${error}`);
+  };
+  const updateTask = async (id, name, age) => {
+    console.log(id, name, age);
+    await fetch(`/.netlify/functions/update`, {
+      method: "PUT",
+      body: JSON.stringify({ id, name, age }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
+  };
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const afterOpenModal = () => {
+    <div>
+      <Formik
+        initialValues={{ name: "", age: null }}
+        onSubmit={(values) => {
+          updateTask(values.name, values.age, updateId);
+          setUseEffect(true);
+        }}
+      >
+        {(formik) => (
+          <Form onSubmit={formik.handleSubmit}>
+            <Field as={TextField} variant="outlined" name="name" label="Name" />
+            <Field as={TextField} variant="outlined" name="age" label="Age" />
+            <div style={{ marginTop: "20px" }}>
+              <Button type="submit" color="secondary" variant="outlined">
+                Update
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>;
+  };
+
+  const closeModal = () => {
+    setOpen(false);
   };
 
   return (
@@ -51,9 +98,24 @@ export default function FormData() {
             >
               Delete
             </button>
+            <button
+              className="deleteButton"
+              onClick={async () => {
+                deleteTask(details.ref["@ref"].id);
+              }}
+            >
+              Delete
+            </button>
           </tr>
         ))}
       </table>
+      <Modal
+        isOpen={open}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      ></Modal>
     </div>
   );
 }
